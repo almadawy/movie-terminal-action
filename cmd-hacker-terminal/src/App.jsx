@@ -27,7 +27,8 @@ function App() {
     addOutput(`Searching for command: ${cmd}...`, 'system');
 
     try {
-      const response = await fetch(`http://localhost:3001/api/search?command=${encodeURIComponent(cmd)}`);
+      const API_URL = import.meta.env.PROD ? '/api' : 'http://localhost:3001/api';
+      const response = await fetch(`${API_URL}/search?command=${encodeURIComponent(cmd)}`);
       const data = await response.json();
 
       if (data.error) {
